@@ -2,22 +2,26 @@
 puts "==="
 puts "==="
 puts "==="
-sleep 1
+sleep 10
+10.times do |i| 
+ sleep(5)
+ File.open("#{i}.txt", 'w') {|f| f.write(" #{i}th file created ") }
+ puts "sync #{i}"
+end
 50.times { |i| puts "cnvrg_linechart_AccuracyLog value: '#{"%f" % (i**2 * 0.000001).to_s}'"}
 100.times { |i| puts "cnvrg_linechart_Event group: 'ts' value: '#{"%f" % (i**2 * 0.000004).to_s}'"}
 120.times { |i| puts "cnvrg_linechart_Event group: 'epochs' value: '#{"%f" % (i**2 * 0.000005).to_s}'"}
 
-puts "cnvrg_tag_Accuracy: 0.8766"
+puts "cnvrg_tag_Accuracy: 0.9766"
 puts "cnvrg_tag_Algorithm: NeuralNetworks"
-puts "cnvrg_tag_Architecture: RNN"
-puts "cnvrg_tag_FeaturesDim:300"                                                
-puts "cnvrg_tag_BatchSize:64"
-puts "cnvrg_tag_epochs:9" 
-puts "cnvrg_tag_WordEmbedding:FastText1" 
+puts "cnvrg_tag_Architecture: RNN (LSTM)"
+puts "cnvrg_tag_FeaturesDim:200"                                                
+puts "cnvrg_tag_BatchSize:32"
+puts "cnvrg_tag_epochs:10" 
+puts "cnvrg_tag_WordEmbedding:FastText" 
 
 puts "============================"                                             
-puts "Loading model"    
-sleep 10                                                        
+puts "Loading model"                                                            
                                                                                 
 keras_lines = ["Train on 2394 samples, validate on 1027 samples", "Epoch 1/10", 
                               "2394/2394 [==============================] - 0s - loss: 0.6898 - acc: 0.5455 - val_loss: 0.6835 - val_acc: 0.5716",
@@ -35,7 +39,6 @@ keras_lines = ["Train on 2394 samples, validate on 1027 samples", "Epoch 1/10",
                                                                                 
 keras_lines.each do |l|                                                         
       puts l                                                                      
-end
-`touch /cnvrg/file.txt`   
+end   
 `cp ../image1.png .`                                                           
 #
