@@ -17,7 +17,7 @@ puts "cnvrg_tag_WordEmbedding:FastText1"
 
 puts "============================"                                             
 puts "Loading model"    
-sleep 360                                                        
+sleep 10                                                        
                                                                                 
 keras_lines = ["Train on 2394 samples, validate on 1027 samples", "Epoch 1/10", 
                               "2394/2394 [==============================] - 0s - loss: 0.6898 - acc: 0.5455 - val_loss: 0.6835 - val_acc: 0.5716",
