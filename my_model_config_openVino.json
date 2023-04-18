@@ -1,0 +1,14 @@
+{
+   "model_config_list":[
+      {
+         "config":{
+            "name":"resnet",
+            "base_path":"/cnvrg/models/resnet50",
+            "layout": "NHWC:NCHW",
+            "batch_size": "auto",
+            "plugin_config": {
+                    "CPU_THROUGHPUT_STREAMS":  "1"}
+         }
+      }
+   ]
+}
