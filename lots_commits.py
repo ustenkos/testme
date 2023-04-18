@@ -5,7 +5,7 @@ os.system("mkdir -p testfiles")
 for i in range(45):
     with open("testfiles/file_%s.txt" %i, 'w+') as file:
         file.write('hello')
-        os.system("cnvrg sync")
+        os.system("cnvrgv2 sync")
 #######Create YAML files###########
 #     with open("testfiles/file_%s.txt_tags.yml" %i, 'w+') as yml:
 #         yml.write("""---
