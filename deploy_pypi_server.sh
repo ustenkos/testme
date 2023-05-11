@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ### MANDATORY ### define the cnvrg cluster domain:
-CLUSTER_DOMAIN="aks-cicd-18258.cicd.cnvrg.me"
+CLUSTER_DOMAIN=$1
 
 ### OPTIONAL  ### define the PYPI server username:
 PYPI_USERNAME="itayosadminos"
