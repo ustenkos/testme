@@ -60,6 +60,8 @@ pip install twine
 pip download --dest . tensorboard jupyterlab jupyterlab-git gunicorn \
 dash dash-daq voila pygments flask pika plumber faust-streaming dataclasses
 
+sleep 15s
+
 # upload the packages to pypi server:
 twine upload --repository-url \
 http://pypi.$CLUSTER_DOMAIN \
