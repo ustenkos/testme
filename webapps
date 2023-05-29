@@ -1,0 +1,12 @@
+Dash:
+file: app.py
+image: cnvrg_v5
+
+
+Voila:
+Notebook File: basics.ipynb
+Image: cnvrg_v5
+
+Shiny:
+file: app.R
+image: cnvrg_r:v5
