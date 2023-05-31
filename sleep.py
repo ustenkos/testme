@@ -1,2 +1,2 @@
 import time
-time.sleep(5000)
+time.sleep(500)
