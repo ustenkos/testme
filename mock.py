@@ -51,7 +51,10 @@ def stress_ng_mock():
 
         response_msg = f"Test finished execution with params: CPU={cpu_percentage}, MEM={mem_percentage}, HDD={storage}, DURATION={duration}"
         response_code = 200
-        
+    except Exception as e:
+        response_msg = f"Test failed execution with params: CPU={cpu_percentage}, MEM={mem_percentage}, HDD={storage}, DURATION={duration}"
+        response_code = 500
+
     return response_msg, response_code
 
 @app.route('/system-metrics', methods=['GET'])
