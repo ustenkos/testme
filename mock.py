@@ -15,7 +15,7 @@ def simulate_cpu_stress():
 def run_stress_ng(cpu, mem, storage, duration):
     # Simulate running the stress-ng test (You would replace this with the actual stress-ng command)
     # stress_ng_cmd = f"stress-ng -c 100 -l {cpu[: -1]} -m 1 --vm-bytes {mem} --hdd {storage} --timeout {duration}"
-    stress_ng_cmd = f"stress-ng --cpu {cpu} --vm 1 --vm-bytes {mem} --hdd 10 --hdd-bytes {storage} --timeout {duration}"
+    stress_ng_cmd = f"stress-ng --cpu {cpu} --vm 1 --vm-bytes {mem} --hdd 100 --hdd-bytes {storage} --timeout {duration}"
     print(f"Running stress-ng command: {stress_ng_cmd}")
     subprocess.run(stress_ng_cmd, shell=True)
 
@@ -51,10 +51,7 @@ def stress_ng_mock():
 
         response_msg = f"Test finished execution with params: CPU={cpu_percentage}, MEM={mem_percentage}, HDD={storage}, DURATION={duration}"
         response_code = 200
-    except Exception as e:
-        response_msg = f"Test failed execution with params: CPU={cpu_percentage}, MEM={mem_percentage}, HDD={storage}, DURATION={duration}"
-        response_code = 500
-
+        
     return response_msg, response_code
 
 @app.route('/system-metrics', methods=['GET'])
@@ -69,4 +66,4 @@ def system_metrics():
     }), 200
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=9000)
+    app.run(host='0.0.0.0', port=8000)
