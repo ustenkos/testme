@@ -38,6 +38,8 @@ def get_system_metrics():
     # Get real system metrics using psutil
     cpu_count = psutil.cpu_count()
     cpu_usage = psutil.cpu_percent(interval=1)
+    memory_count = psutil.virtual_memory().total
+    total_memory_gb = memory_count / (1024 ** 3)
     memory_usage = round(psutil.virtual_memory().used / (1024 * 1024), 2)
     storage_data = psutil.disk_usage('/')
 
@@ -48,10 +50,11 @@ def get_system_metrics():
     }
 
     return {
-        "cpu_count": cpu_count,
+        "cpu_count_cores": cpu_count,
         "cpu_usage": str(cpu_usage) + "%",
-        "memory_usage": memory_usage,
-        "storage_metrics": storage_metrics
+        "ram_count_gb":  total_memory_gb,
+        "ram_usage_gb": memory_usage,
+        "storage_metrics_gb": storage_metrics
     }
 
 
