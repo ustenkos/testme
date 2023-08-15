@@ -52,7 +52,7 @@ def get_system_metrics():
     return {
         "cpu_count_cores": cpu_count,
         "cpu_usage": str(cpu_usage) + "%",
-        "ram_count_gb":  total_memory_gb,
+        "ram_count_gb":  round(total_memory_gb, 2),
         "ram_usage_gb": memory_usage,
         "storage_metrics_gb": storage_metrics
     }
