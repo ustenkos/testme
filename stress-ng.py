@@ -79,14 +79,11 @@ def start_stress_ng():
 
 @app.route('/stress-ng/stop', methods=['POST'])
 def stop_stress_ng():
-    global stress_ng_process
-
-    if stress_ng_process:
-        stress_ng_process.terminate()  # Terminate the stress-ng process
-        stress_ng_process = None
-        return "Stopping stress-ng process", 200
-    else:
-        return "No stress-ng process is currently running", 400
+    try:
+        subprocess.run(['pkill', 'stress-ng'], check=True)
+        return "Stopping stress-ng processes", 200
+    except subprocess.CalledProcessError as e:
+        return f"Error stopping stress-ng processes: {e}", 500
 
 
 @app.route('/stress-ng/system-metrics', methods=['GET'])
