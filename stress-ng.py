@@ -18,7 +18,7 @@ def simulate_cpu_stress():
 def run_stress_ng(cpu_cores, cpu_perc, mem, storage, duration):
     global stress_ng_process
     cpu_perc = str(cpu_perc).replace('%', '')
-    stress_ng_cmd = f"stress-ng --cpu {cpu_cores} --cpu-load {cpu_perc} --vm 1 --vm-bytes {mem} --hdd 100 --hdd-bytes {storage} --timeout {duration}"
+    stress_ng_cmd = f"stress-ng --cpu {cpu_cores} --cpu-load {cpu_perc} --vm 1 --vm-bytes {mem} --hdd 1 --hdd-bytes {storage} --timeout {duration}"
     print(f"Running stress-ng command: {stress_ng_cmd}")
 
     stress_ng_process = subprocess.Popen(stress_ng_cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
