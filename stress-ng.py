@@ -1,6 +1,7 @@
 import os
 import time
 import threading
+import signal
 import subprocess
 import psutil
 from flask import Flask, request, jsonify
@@ -54,6 +55,22 @@ def get_system_metrics():
     }
 
 
+def stop_stress_ng_processes():
+    global stress_ng_process
+    any_stopped = False
+
+    for process in psutil.process_iter(attrs=['pid', 'name']):
+        if 'stress-ng' in process.info['name'].lower():
+            try:
+                os.kill(process.info['pid'], signal.SIGTERM)
+                print(f"Terminated stress-ng process with PID: {process.info['pid']}")
+                any_stopped = True
+            except Exception as e:
+                print(f"Error terminating process with PID {process.info['pid']}: {e}")
+
+    return any_stopped
+
+
 
 @app.route('/stress-ng/start', methods=['POST'])
 def start_stress_ng():
@@ -79,10 +96,14 @@ def start_stress_ng():
 
 @app.route('/stress-ng/stop', methods=['POST'])
 def stop_stress_ng():
+    global stress_ng_process
     try:
-        subprocess.run(['pkill', 'stress-ng'], check=True)
-        return "Stopping stress-ng processes", 200
-    except subprocess.CalledProcessError as e:
+        stopped = stop_stress_ng_processes()
+        if stopped:
+            return "All stress-ng processes stopped", 200
+        else:
+            return "No stress-ng processes were running", 200
+    except Exception as e:
         return f"Error stopping stress-ng processes: {e}", 500
 
 
