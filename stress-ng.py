@@ -4,6 +4,7 @@ import threading
 import signal
 import subprocess
 import psutil
+from fractions import Fraction
 from flask import Flask, request, jsonify
 
 app = Flask(__name__)
@@ -38,11 +39,13 @@ def get_system_metrics():
     # Get real system metrics using psutil
     cpu_count = psutil.cpu_count()
     cpu_usage = psutil.cpu_percent(interval=1, percpu=True)
+    cpu_usage_all = psutil.cpu_percent(interval=1)
     num_loaded_cores = sum(1 for percent in cpu_usage if percent > 0)
     total_cores = len(cpu_usage)
     memory_count = psutil.virtual_memory().total
     total_memory_gb = memory_count / (1024 ** 3)
     memory_usage = round(psutil.virtual_memory().used / (1024 ** 3), 2)
+    ram_count_gb = round(total_memory_gb, 2)
     storage_data = psutil.disk_usage('/')
 
     storage_metrics = {
@@ -52,10 +55,9 @@ def get_system_metrics():
     }
 
     return {
-        "cpu_count_cores": cpu_count,
-        "cpu_usage": f"{num_loaded_cores}/{total_cores}",
-        "ram_count_gb":  round(total_memory_gb, 2),
-        "ram_usage_gb": memory_usage,
+        "cpu_usage_cores": f"{num_loaded_cores}/{total_cores}",
+        "cpu_usage": str(cpu_usage_all) + "%",
+        "ram_usage_gb": f"{memory_usage}/{ram_count_gb}",
         "storage_metrics_gb": storage_metrics
     }
 
