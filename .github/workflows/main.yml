@@ -1,0 +1,19 @@
+name: Trigger Jenkins Job
+
+on:
+  push:
+    branches:
+      - main  # Replace with the branch you want to trigger on
+
+jobs:
+  trigger-jenkins:
+    runs-on: cpu1
+
+    steps:
+    - name: Trigger Jenkins Job
+      env:
+        JENKINS_USERNAME: ${{ secrets.JENKINS_USERNAME }}
+        JENKINS_API_TOKEN: ${{ secrets.JENKINS_API_TOKEN }}
+      run: |
+        curl -X POST "https://devops.jenkins.cnvrg.io/job/QA-IDC-API/build" \
+          --user "$JENKINS_USERNAME:$JENKINS_API_TOKEN"
