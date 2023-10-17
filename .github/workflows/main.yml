@@ -16,6 +16,5 @@ jobs:
     steps:
     - name: Trigger Jenkins Job
       run: |
-        echo "My secret API key: $JENKINS_COOKIE"
-        # curl 'https://devops.jenkins.cnvrg.io/job/QA-IDC-API/buildWithParameters?token=$JENKINS_API_TOKEN' \
-        # -H 'Cookie: $JENKINS_COOKIE'
+        curl 'https://devops.jenkins.cnvrg.io/job/QA-IDC-API/buildWithParameters?token=$JENKINS_API_TOKEN' \
+        -H 'Cookie: $JENKINS_COOKIE'
