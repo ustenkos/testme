@@ -10,8 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      JENKINS_COOKIE: ${{ secrets.JENKINS_COOKIE }}
-      JENKINS_API_TOKEN: ${{ secrets.JENKINS_API_TOKEN }}
+      JENKINS_COOKIE: ${{ secrets.jenkins.JENKINS_COOKIE }}
+      JENKINS_API_TOKEN: ${{ secrets.jenkins.JENKINS_API_TOKEN }}
 
     steps:
     - name: Trigger Jenkins Job
